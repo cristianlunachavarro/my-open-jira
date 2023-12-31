@@ -1,30 +1,38 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-const mongooConnection = {
-  isConnected: 0,
-};
+const connect = async () => {
+    try {
+        const dbConnection = process.env.DB_CONNECTION; // Asignamos el valor a una variable
+        if (!dbConnection) {
+            throw new Error('DB connection string is not defined'); // Manejamos el caso en el que no esté definido
+        }
 
-export const connect = async () => {
-  if (mongooConnection.isConnected) {
-    console.log("We are already connected");
-    return;
-  }
-
-  if (mongoose.connections.length > 0) {
-    mongooConnection.isConnected = mongoose.connections[0].readystate;
-    if (mongooConnection.isConnected === 1) {
-      console.log("Using last connection");
-      return;
+        if (mongoose.connection.readyState !== 1) {
+            await mongoose.connect(dbConnection, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+            console.log('Connected to MongoDB');
+        } else {
+            console.log('Already connected to MongoDB');
+        }
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
     }
-    await mongoose.connection.close();
-  }
-  await mongoose.connect(process.env.DB_CONNECTION);
-  mongooConnection.isConnected = 1;
-  console.log("Conected to MongoDb");
 };
 
-export const disconnect = async () => {
-  if (mongooConnection.isConnected === 0) return;
-  await mongoose.connection.close();
-  console.log("Disconnected from MongoDb");
+
+const disconnect = async () => {
+    try {
+        if (mongoose.connection.readyState !== 0) {
+            await mongoose.disconnect();
+            console.log('Disconnected from MongoDB');
+        } else {
+            console.log('Already disconnected from MongoDB');
+        }
+    } catch (error) {
+        console.error('Error disconnecting from MongoDB:', error);
+    }
 };
+
+export { connect, disconnect };

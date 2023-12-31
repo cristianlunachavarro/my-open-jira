@@ -1,0 +1,22 @@
+.errorMessagePaper {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    border-radius: 8px;
+    transform: translateX(-50%);
+    width: 40%;
+    background: #c04e4e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 5px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.show {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+

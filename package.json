@@ -14,13 +14,18 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.14",
+    "@types/axios": "^0.14.0",
     "@types/uuid": "^9.0.7",
-    "mongoose": "7.6.4",
-    "next": "13.5.5",
+    "axios": "^1.6.2",
+    "canvas-confetti": "^1.9.2",
+    "chart.js": "^4.4.1",
+    "mongoose": "^8.0.3",
+    "next": "^13.5.5",
     "node": "^21.1.0",
     "react": "^18",
     "react-dom": "^18",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "victory": "^36.7.0"
   },
   "devDependencies": {
     "@types/node": "^20",
