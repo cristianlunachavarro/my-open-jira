@@ -3,10 +3,7 @@ import { connect, disconnect } from "../../../../database/db";
 import { Entry as EntryInterface } from "../../../../interfaces/index";
 import Entry from "../../../../models/entries";
 
-type Data = {
-  entry?: EntryInterface[];
-  error?: string;
-};
+type Data = EntryInterface[] | { error: string };
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,14 +11,12 @@ export default async function handler(
 ) {
   const deleteEntry = async (id: string) => {
     try {
+      await connect();
       const result = await Entry.deleteOne({ _id: id });
 
       if (result.deletedCount > 0) {
         const remainingEntries: EntryInterface[] = await Entry.find();
-        const responseData: Data = {
-          entry: remainingEntries,
-        };
-        res.status(200).json(responseData);
+        res.status(200).json(remainingEntries);
       } else {
         console.error("Error entry not found");
         const errorResponse: Data = {

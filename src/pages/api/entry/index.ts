@@ -4,10 +4,8 @@ import { Entry as EntryInterface } from "../../../../interfaces/index";
 
 import { connect, disconnect } from "../../../../database/db";
 
-type Data = {
-  entries?: EntryInterface[];
-  error?: string;
-};
+type Data = EntryInterface[] | { error: string };
+
 
 interface BodyProps {
   _id?: string;
