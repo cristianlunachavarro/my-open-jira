@@ -5,7 +5,7 @@ import { Entry as EntryInterface } from "../../../../interfaces/index";
 import { connect, disconnect } from "../../../../database/db";
 
 type Data = {
-  entry?: EntryInterface[];
+  entries?: EntryInterface[];
   error?: string;
 };
 
@@ -23,7 +23,7 @@ export default async function handler(
     try {
       await connect();
       const entries: EntryInterface[] = await Entry.find();
-      res.status(200).json({ entry: entries });
+      res.status(200).json(entries);
       await disconnect();
     } catch (err) {
       console.error("Error creating entry:", err);
