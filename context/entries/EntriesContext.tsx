@@ -3,7 +3,6 @@ import { Entry, Task } from "../../interfaces";
 
 interface ContextProps {
     entries: Entry[];
-    editing: boolean;
     addNewEntry: (description: string) => void;
     updateEntry: (entry: Entry) => void;
     deleteEntry: (entry: Entry) => void;

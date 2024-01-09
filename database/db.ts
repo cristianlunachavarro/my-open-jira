@@ -2,16 +2,13 @@ import mongoose from 'mongoose';
 
 const connect = async () => {
     try {
-        const dbConnection = process.env.DB_CONNECTION; // Asignamos el valor a una variable
+        const dbConnection = process.env.DB_CONNECTION;
         if (!dbConnection) {
-            throw new Error('DB connection string is not defined'); // Manejamos el caso en el que no esté definido
+            throw new Error('DB connection string is not defined');
         }
 
         if (mongoose.connection.readyState !== 1) {
-            await mongoose.connect(dbConnection, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
+            await mongoose.connect(dbConnection);
             console.log('Connected to MongoDB');
         } else {
             console.log('Already connected to MongoDB');
@@ -20,7 +17,6 @@ const connect = async () => {
         console.error('Error connecting to MongoDB:', error);
     }
 };
-
 
 const disconnect = async () => {
     try {

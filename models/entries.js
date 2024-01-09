@@ -33,4 +33,4 @@ const entrySchema = new mongoose.Schema({
 
 const Entry = mongoose.models.Entry || mongoose.model('Entry', entrySchema);
 
-module.exports = Entry;
+export default Entry;

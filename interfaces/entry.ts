@@ -2,7 +2,7 @@ export interface Entry {
   _id: string;
   description: string;
   tasks: [];
-  createdAt: number;
+  createdAt: string;
   editing: boolean,
   status: EntryStatus;
 }

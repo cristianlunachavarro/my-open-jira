@@ -6,6 +6,7 @@ interface contextProps {
     isAddingEntry: boolean;
     isDragging: boolean;
     isEditing: boolean;
+    errorMessage: string;
     openSideMenu: () => void;
     closeSideMenu: () => void;
     setIsAddingEntry: (isAddingEntry: boolean) => void;
