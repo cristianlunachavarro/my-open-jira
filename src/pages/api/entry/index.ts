@@ -6,7 +6,6 @@ import { connect, disconnect } from "../../../../database/db";
 
 type Data = EntryInterface[] | { error: string };
 
-
 interface BodyProps {
   _id?: string;
   description: string;
@@ -52,27 +51,29 @@ export default async function handler(
       await disconnect();
     }
   };
-
   const updateEntry = async (body: BodyProps) => {
     const { description, status, _id } = body;
     try {
-      await connect();
-      const updatedEntry = await Entry.findOneAndUpdate(
-        { _id: _id },
-        { description: description, status: status },
-        { new: true }
-      );
-      res.status(200).json(updatedEntry);
-      await disconnect();
+        await connect();
+
+        const updatedEntry = await Entry.findOneAndUpdate(
+            { _id: _id },
+            { description: description, status: status },
+            { new: true }
+        );
+
+        res.status(200).json(updatedEntry);
+        await disconnect();
     } catch (err) {
-      console.error("Error updating an entry:", err);
-      const errorResponse: Data = {
-        error: "Internal Server Error",
-      };
-      res.status(500).json(errorResponse);
-      await disconnect();
+        console.error("Error updating an entry:", err);
+        const errorResponse: Data = {
+            error: "Internal Server Error",
+        };
+        res.status(500).json(errorResponse);
+        await disconnect();
     }
-  };
+};
+
 
   const { body, method } = req;
 
