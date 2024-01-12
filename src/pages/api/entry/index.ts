@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Entry from "../../../../models/entries";
 import { Entry as EntryInterface } from "../../../../interfaces/index";
 
+import cors from "cors";
 import { connect, disconnect } from "../../../../database/db";
 
 type Data = EntryInterface[] | { error: string };
@@ -12,10 +13,19 @@ interface BodyProps {
   status: boolean;
 }
 
+const corsMiddleware = cors({
+  origin: "https://my-open-jira.vercel.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+});
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
+  next: any
 ) {
+  await corsMiddleware(req, res, next);
+
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -93,7 +103,7 @@ export default async function handler(
     case "PUT":
       await updateEntry(body);
       break;
-    case "OPTION":
+    case "OPTIONS":
       res.status(200).end();
       break;
     default:
