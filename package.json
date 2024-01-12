@@ -20,6 +20,7 @@
     "axios": "^1.6.2",
     "canvas-confetti": "^1.9.2",
     "chart.js": "^4.4.1",
+    "install": "^0.13.0",
     "mongoose": "^8.0.3",
     "next": "^13.5.5",
     "node": "^21.1.0",
