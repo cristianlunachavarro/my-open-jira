@@ -7,14 +7,16 @@ const connect = async () => {
       throw new Error("DB connection string is not defined");
     }
 
-    if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(dbConnection);
-      console.log("Connected to MongoDB");
-    } else {
-      console.log("Already connected to MongoDB");
-    }
+    const options = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as any;
+
+    await mongoose.connect(dbConnection, options);
+    console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
+    throw error;
   }
 };
 
@@ -28,6 +30,7 @@ const disconnect = async () => {
     }
   } catch (error) {
     console.error("Error disconnecting from MongoDB:", error);
+    throw error;
   }
 };
 
