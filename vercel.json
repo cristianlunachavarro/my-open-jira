@@ -1,16 +1,20 @@
 {
-  "version": 2,
-  "builds": [{ "src": "package.json", "use": "@now/next" }],
-  "routes": [
-    {
-      "handle": "cors",
-      "src": "/api/(.*)",
-      "dest": "serverless/api/$1"
-    },
-    {
-      "handle": "cors",
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
-}
+    "version": 2,
+    "builds": [{ "src": "package.json", "use": "@now/next" }],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "api/$1",
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS, POST, GET, PUT, DELETE",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ]
+  }
+  
