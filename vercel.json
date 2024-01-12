@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [{ "src": "package.json", "use": "@now/next" }],
+  "routes": [
+    {
+      "handle": "cors",
+      "src": "/api/(.*)",
+      "dest": "serverless/api/$1"
+    },
+    {
+      "handle": "cors",
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
