@@ -16,9 +16,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "OPTIONS, POST, GET, PUT, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, POST, GET, PUT, DELETE"
+  );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   const getEntries = async () => {
@@ -59,26 +61,25 @@ export default async function handler(
   const updateEntry = async (body: BodyProps) => {
     const { description, status, _id } = body;
     try {
-        await connect();
+      await connect();
 
-        const updatedEntry = await Entry.findOneAndUpdate(
-            { _id: _id },
-            { description: description, status: status },
-            { new: true }
-        );
+      const updatedEntry = await Entry.findOneAndUpdate(
+        { _id: _id },
+        { description: description, status: status },
+        { new: true }
+      );
 
-        res.status(200).json(updatedEntry);
-        await disconnect();
+      res.status(200).json(updatedEntry);
+      await disconnect();
     } catch (err) {
-        console.error("Error updating an entry:", err);
-        const errorResponse: Data = {
-            error: "Internal Server Error",
-        };
-        res.status(500).json(errorResponse);
-        await disconnect();
+      console.error("Error updating an entry:", err);
+      const errorResponse: Data = {
+        error: "Internal Server Error",
+      };
+      res.status(500).json(errorResponse);
+      await disconnect();
     }
-};
-
+  };
 
   const { body, method } = req;
 
@@ -91,6 +92,9 @@ export default async function handler(
       break;
     case "PUT":
       await updateEntry(body);
+      break;
+    case "OPTION":
+      res.status(200).end();
       break;
     default:
       res.status(405).json({ error: "Method Not Allowed" });
