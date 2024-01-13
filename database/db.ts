@@ -6,13 +6,7 @@ const connect = async () => {
     if (!dbConnection) {
       throw new Error("DB connection string is not defined");
     }
-
-    const options = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as any;
-
-    await mongoose.connect(dbConnection, options);
+    await mongoose.connect(dbConnection);
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
