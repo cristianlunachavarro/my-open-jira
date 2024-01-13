@@ -12,6 +12,7 @@ export default async function handler(
 ) {
   corsMiddleware(req, res, async () => {
     const deleteEntry = async (id: string) => {
+      console.log('Entra aca')
       try {
         await connect();
         const result = await Entry.deleteOne({ _id: id });
@@ -48,7 +49,7 @@ export default async function handler(
         break;
       default:
         res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
-        res.status(405).end(`Método ${method} no permitido`);
+        res.status(405).end(`Method ${method} not allowed`);
     }
   });
 }

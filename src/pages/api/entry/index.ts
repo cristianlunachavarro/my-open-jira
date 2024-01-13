@@ -89,7 +89,8 @@ export default async function handler(
         res.status(200).end();
         break;
       default:
-        res.status(405).json({ error: "Method Not Allowed" });
+        res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
+        res.status(405).end(`Method ${req.method} not allowed`);
     }
   });
 }

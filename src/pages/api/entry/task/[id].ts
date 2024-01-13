@@ -50,7 +50,7 @@ export default async function handler(
         break;
       default:
         res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
-        res.status(405).end(`Método ${method} no permitido`);
+        res.status(405).end(`Method ${method} not allowed`);
     }
   });
 }

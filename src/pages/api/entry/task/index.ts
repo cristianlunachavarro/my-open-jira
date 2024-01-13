@@ -39,7 +39,6 @@ export default async function handler(
           updateField = "tasks.$.taskName";
           updatedValue = value.editedTask;
         } else {
-          // Provide a default value in case value.completed is undefined
           updateField = "tasks.$.completed";
           updatedValue = value.completed || false;
         }
@@ -96,7 +95,8 @@ export default async function handler(
       case "POST":
         await addTask(body);
       default:
-        res.status(405).json({ error: "Method Not Allowed" });
+        res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
+        res.status(405).end(`Method ${method} not allowed`);
     }
   });
 }
