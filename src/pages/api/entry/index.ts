@@ -1,8 +1,8 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import cors from 'cors';
-import { connect, disconnect } from '../../../../database/db';
-import Entry from '../../../../models/entries';
-import { Entry as EntryInterface } from '../../../../interfaces/index';
+import { NextApiRequest, NextApiResponse } from "next";
+import { connect, disconnect } from "../../../../database/db";
+import Entry from "../../../../models/entries";
+import { Entry as EntryInterface } from "../../../../interfaces/index";
+import corsMiddleware from "../corsMiddleware";
 
 type Data = EntryInterface[] | { error: string };
 
@@ -12,24 +12,11 @@ interface BodyProps {
   status: boolean;
 }
 
-const corsMiddleware = cors({
-  origin: 'https://my-open-jira.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-});
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   corsMiddleware(req, res, async () => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'OPTIONS, POST, GET, PUT, DELETE'
-    );
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
     const getEntries = async () => {
       try {
         await connect();
@@ -37,9 +24,9 @@ export default async function handler(
         res.status(200).json(entries);
         await disconnect();
       } catch (err) {
-        console.error('Error getting entries:', err);
+        console.error("Error getting entries:", err);
         const errorResponse: Data = {
-          error: 'Internal Server Error',
+          error: "Internal Server Error",
         };
         res.status(500).json(errorResponse);
         await disconnect();
@@ -57,9 +44,9 @@ export default async function handler(
         res.status(200).json(newEntry);
         await disconnect();
       } catch (err) {
-        console.error('Error creating entry:', err);
+        console.error("Error creating entry:", err);
         const errorResponse: Data = {
-          error: 'Internal Server Error',
+          error: "Internal Server Error",
         };
         res.status(500).json(errorResponse);
         await disconnect();
@@ -79,9 +66,9 @@ export default async function handler(
         res.status(200).json(updatedEntry);
         await disconnect();
       } catch (err) {
-        console.error('Error updating an entry:', err);
+        console.error("Error updating an entry:", err);
         const errorResponse: Data = {
-          error: 'Internal Server Error',
+          error: "Internal Server Error",
         };
         res.status(500).json(errorResponse);
         await disconnect();
@@ -89,20 +76,20 @@ export default async function handler(
     };
 
     switch (req.method) {
-      case 'GET':
+      case "GET":
         await getEntries();
         break;
-      case 'POST':
+      case "POST":
         await createEntry(req.body);
         break;
-      case 'PUT':
+      case "PUT":
         await updateEntry(req.body);
         break;
-      case 'OPTIONS':
+      case "OPTIONS":
         res.status(200).end();
         break;
       default:
-        res.status(405).json({ error: 'Method Not Allowed' });
+        res.status(405).json({ error: "Method Not Allowed" });
     }
   });
 }
