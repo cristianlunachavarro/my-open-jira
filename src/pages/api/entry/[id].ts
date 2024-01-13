@@ -12,7 +12,6 @@ export default async function handler(
 ) {
   corsMiddleware(req, res, async () => {
     const deleteEntry = async (id: string) => {
-      console.log('Entra aca')
       try {
         await connect();
         const result = await Entry.deleteOne({ _id: id });
