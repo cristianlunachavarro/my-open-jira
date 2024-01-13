@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/api/",
+  baseURL: "https://my-open-jira.vercel.app/api/",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
