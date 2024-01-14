@@ -5,7 +5,7 @@ import Head from "next/head";
 import { Box } from "@mui/material";
 import { NavBar, Sidebar } from "../ui";
 
-import Error from "./Error"
+import Error from "./Error";
 
 interface LayoutProps {
   title?: string;
@@ -21,7 +21,7 @@ export const Layout: FC<LayoutProps> = ({ title = "Open Jira", children }) => {
       <NavBar />
       <Sidebar />
       <Box sx={{ padding: "20px 20px" }}> {children}</Box>
-        <Error/>
+      <Error />
     </Box>
   );
 };
