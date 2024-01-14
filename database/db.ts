@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connect = async () => {
   try {
-    const dbConnection = process.env.MONGODB_URI;
+    const dbConnection = "mongodb+srv://cristianlunachavarro:vcYGta4XaBCgLGOn@cluster0.4pealig.mongodb.net/";
     if (!dbConnection) {
       throw new Error("DB connection string is not defined");
     }
