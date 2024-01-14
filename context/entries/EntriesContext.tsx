@@ -29,6 +29,7 @@ interface ContextProps {
     entry: Entry;
     editedTask: string;
   }) => void;
+  isLoading: boolean;
 }
 
 export const EntriesContext = createContext({} as ContextProps);

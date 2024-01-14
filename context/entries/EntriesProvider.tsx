@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useReducer } from "react";
+import { FC, ReactNode, useEffect, useReducer, useState } from "react";
 import instance from "../../src/axiosInstance";
 
 import { ENTRIES_INITIAL_STATE, EntriesContext, entriesReducer } from "./";
@@ -10,36 +10,46 @@ interface EntriesState {
 
 export const EntriesProvider: FC<EntriesState> = ({ children }) => {
   const [state, dispatch] = useReducer(entriesReducer, ENTRIES_INITIAL_STATE);
+  const [isLoading, setIsloading] = useState<boolean>(false)
 
   // Entry
 
   const addNewEntry = async (description: string) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry } = await instance.post("entry", {
         description: description,
       });
+      setIsloading(false)
       dispatch({ type: "Entry - Add Entry", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error adding new entry:", err);
     }
   };
 
   const updateEntry = async (entry: Entry) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry } = await instance.put("entry", entry);
+      setIsloading(false)
       dispatch({ type: "Entry - Entry Updated", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error updating an entry:", err);
     }
   };
 
   const deleteEntry = async (entry: Entry) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry[] } = await instance.delete(
         `entry/${entry._id}`
       );
+      setIsloading(false)
       dispatch({ type: "Entry - Delete entry", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error adding new entry:", err);
     }
   };
@@ -50,10 +60,13 @@ export const EntriesProvider: FC<EntriesState> = ({ children }) => {
 
   const getEntries = async () => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry[] } = await instance.get("entry");
+      setIsloading(false)
       dispatch({ type: "Entry - Get entries", payload: data });
     } catch (err) {
       console.error("Error getting entries:", err);
+      setIsloading(false)
     }
   };
 
@@ -67,18 +80,22 @@ export const EntriesProvider: FC<EntriesState> = ({ children }) => {
     entry: Entry;
   }) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry } = await instance.post("entry/task", {
         newTask,
         entry,
       });
+      setIsloading(false)
       dispatch({ type: "Entry - Add New Task", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error Adding new task:", err);
     }
   };
 
   const deleteTask = async (taskId: string, entry: Entry) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry } = await instance.delete(
         `entry/task/${taskId}`,
         {
@@ -87,8 +104,10 @@ export const EntriesProvider: FC<EntriesState> = ({ children }) => {
           },
         }
       );
+      setIsloading(false)
       dispatch({ type: "Entry - Delete Task", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error deleting a task:", err);
     }
   };
@@ -103,13 +122,16 @@ export const EntriesProvider: FC<EntriesState> = ({ children }) => {
     editedTask: string;
   }) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry } = await instance.put("entry/task", {
         taskId,
         entry,
         value: { editedTask },
       });
+      setIsloading(false)
       dispatch({ type: "Entry - Task Update", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error updating a task:", err);
     }
   };
@@ -124,13 +146,16 @@ export const EntriesProvider: FC<EntriesState> = ({ children }) => {
     completed: boolean;
   }) => {
     try {
+      setIsloading(true)
       const { data }: { data: Entry } = await instance.put("entry/task", {
         entry,
         taskId,
         value: { completed },
       });
+      setIsloading(false)
       dispatch({ type: "Entry - Complete Task", payload: data });
     } catch (err) {
+      setIsloading(false)
       console.error("Error updating a task:", err);
     }
   };
@@ -147,6 +172,7 @@ export const EntriesProvider: FC<EntriesState> = ({ children }) => {
     <EntriesContext.Provider
       value={{
         ...state,
+        isLoading,
         addNewEntry,
         updateEntry,
         setIsEditing,
