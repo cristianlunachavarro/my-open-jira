@@ -10,14 +10,14 @@ import { UIProvider } from "../../context/ui";
 import { EntriesProvider } from "../../context/entries";
 
 export default function App({ Component, pageProps }: AppProps) {
-    return (
-        <EntriesProvider>
-            <UIProvider>
-                <ThemeProvider theme={darkTheme}>
-                    <CssBaseline />
-                    <Component {...pageProps} raton={true} />
-                </ThemeProvider>
-            </UIProvider>
-        </EntriesProvider>
-    );
+  return (
+    <EntriesProvider>
+      <UIProvider>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Component {...pageProps} raton={true} />
+        </ThemeProvider>
+      </UIProvider>
+    </EntriesProvider>
+  );
 }

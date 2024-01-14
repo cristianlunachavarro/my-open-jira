@@ -1,8 +1,8 @@
 import { Button, Box, TextField } from "@mui/material";
 import { SaveOutlined, AddOutlined } from "@mui/icons-material";
 import { ChangeEvent, useContext, useState } from "react";
-import { EntriesContext } from "../../context/entries";
-import { UIContext } from "../../context/ui";
+import { EntriesContext } from "../../../context/entries";
+import { UIContext } from "../../../context/ui";
 
 export const NewEntry = () => {
   const { addNewEntry, entries } = useContext(EntriesContext);
@@ -52,7 +52,7 @@ export const NewEntry = () => {
               color="secondary"
               onClick={() => handleAddClicked(false)}
             >
-              Cancelar
+              Cancel
             </Button>
             <Button
               variant="outlined"
@@ -60,7 +60,7 @@ export const NewEntry = () => {
               endIcon={<SaveOutlined />}
               onClick={handleSubmit}
             >
-              Guardar
+              Save
             </Button>
           </Box>
         </>
@@ -71,7 +71,7 @@ export const NewEntry = () => {
           variant="outlined"
           onClick={() => handleAddClicked(true)}
         >
-          Agregar tarea
+          Create ticket
         </Button>
       )}
     </Box>

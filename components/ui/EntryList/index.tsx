@@ -3,13 +3,13 @@ import { DragEvent, FC, useContext, useMemo } from "react";
 import { List, Paper } from "@mui/material";
 import confetti from 'canvas-confetti'
 
-import { EntryListCard } from ".";
-import { EntryStatus } from "../../interfaces";
+import { EntryListCard } from "..";
+import { EntryStatus } from "../../../interfaces";
 
-import { EntriesContext } from "../../context/entries/EntriesContext";
-import { UIContext } from "../../context/ui";
+import { EntriesContext } from "../../../context/entries/EntriesContext";
+import { UIContext } from "../../../context/ui";
 
-import { isValidTransition } from '../../utils/entryHelpers'
+import { isValidTransition } from '../../../utils/entryHelpers'
 
 import styles from "./EntryList.module.css";
 
@@ -46,7 +46,7 @@ export const EntryList: FC<Props> = ({ status }) => {
             }
             updateEntry(entry);
         } else {
-            setErrorMessage('No se puede cambiar esta tarjeta')
+            setErrorMessage('This transition is not allowed');
         }
         setIsDragging(false);
     };

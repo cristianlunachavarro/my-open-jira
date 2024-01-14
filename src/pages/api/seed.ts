@@ -6,7 +6,7 @@ import Entry from "../../../models/entries";
 const seedData = [
   {
     description:
-      "Pendiente: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
     status: "pending",
     tasks: [
       {
@@ -25,7 +25,7 @@ const seedData = [
   },
   {
     description:
-      "En progreso: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu",
+      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatu",
     status: "in-progress",
     tasks: [
       {
@@ -37,7 +37,7 @@ const seedData = [
   },
   {
     description:
-      "Terminada: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+      "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
     status: "finished",
     tasks: [
       { taskName: "Per bé que sia cosa de gran dolor", completed: false },

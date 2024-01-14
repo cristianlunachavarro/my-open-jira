@@ -12,14 +12,14 @@ import {
 } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
-import { Entry } from "../../interfaces";
-import { UIContext } from "../../context/ui";
-import { EntriesContext } from "../../context/entries";
+import { Entry } from "../../../interfaces";
+import { UIContext } from "../../../context/ui";
+import { EntriesContext } from "../../../context/entries";
 
-import ProgressLine from "../ui/ProgressLine";
+import ProgressLine from "../ProgressLine";
 
-import { formatTime } from "../../utils/helpers";
-import TasksList from "./TasksList";
+import { formatTime } from "../../../utils/helpers";
+import TasksList from "../TaskList";
 
 interface Props {
   entry: Entry;
@@ -89,11 +89,11 @@ export const EntryListCard: FC<Props> = ({ entry }) => {
                 textTransform: "uppercase",
                 margin: "3%",
                 color: "#80b0ff",
-                textAlign: 'center',
-                fontWeight: 700
+                textAlign: "center",
+                fontWeight: 700,
               }}
             >
-              Guardar
+              Save
             </div>
           </Box>
         ) : (
@@ -119,11 +119,10 @@ export const EntryListCard: FC<Props> = ({ entry }) => {
                     textTransform: "uppercase",
                     margin: "2%",
                     color: "#80b0ff",
-                    fontWeight: 700
-
+                    fontWeight: 700,
                   }}
                 >
-                  Editar
+                  Edit
                 </div>
                 <Typography variant="body2" sx={{ marginRight: 2 }}>
                   {formatTime(entry.createdAt)}

@@ -75,7 +75,8 @@ export default async function handler(
       }
     };
 
-    switch (req.method) {
+    const { method } = req;
+    switch (method) {
       case "GET":
         await getEntries();
         break;
@@ -90,7 +91,7 @@ export default async function handler(
         break;
       default:
         res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
-        res.status(405).end(`Method ${req.method} not allowed`);
+        res.status(405).end(`Method ${method} not allowed`);
     }
   });
 }

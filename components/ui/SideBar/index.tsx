@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { UIContext } from "../../context/ui";
+import { UIContext } from "../../../context/ui";
 
 const menuItems: string[] = ["Inbox", "Starred", "Send Mail", "Drafts"];
 
