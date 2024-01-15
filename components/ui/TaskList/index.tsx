@@ -131,6 +131,7 @@ const TasksList: FC<Props> = ({ entry }) => {
             <div key={task._id} className={styles.tasks}>
               {task.isEditing ? (
                 <TextField
+                  autoFocus={true}
                   style={{ width: "100%", margin: "10px 0" }}
                   label={
                     error.input === "editTask" && error.hasError
@@ -145,7 +146,6 @@ const TasksList: FC<Props> = ({ entry }) => {
               ) : (
                 <>
                   <FormControlLabel
-                    style={{ fontSize: "8rem" }}
                     control={
                       <Checkbox
                         checked={task.completed}
@@ -177,7 +177,7 @@ const TasksList: FC<Props> = ({ entry }) => {
         label={
           error.input === "addTask" && error.hasError
             ? error.errorMessage
-            : "Nueva Tarea"
+            : "New Task"
         }
         variant="outlined"
         value={newTask}
