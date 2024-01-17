@@ -1,11 +1,12 @@
 # Next.js Openjira App
-Para correr localmente se nceesita la base de datos
+To run locally, the database is required
 
-```
-docker-compose up -d
-```
-* El -d, significa __detached__
-
+# To run locally
+yarn build
+yarn start
 
 # Mongo conexion local URL
 mongodb://localhost:27017
+
+# Project fully deployed to vercel
+https://my-open-jira.vercel.app/
